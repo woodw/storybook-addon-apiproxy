@@ -13,10 +13,20 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   parameters: {
     myAddonParameter: `
-<MyComponent boolProp scalarProp={1} complexProp={{ foo: 1, bar: '2' }}>
-  <SomeOtherComponent funcProp={(a) => a.id} />
-</MyComponent>
-`,
+      <MyComponent boolProp scalarProp={1} complexProp={{ foo: 1, bar: '2' }}>
+        <SomeOtherComponent funcProp={(a) => a.id} />
+      </MyComponent>
+    `,
+    api: {
+      sendDocuments: {
+        match: 'https://jsonplaceholder.typicode.com/todos',
+        proxy: 'http://www.google.com',
+        mock: {
+          code: 200,
+          json: {},
+        }
+      }
+    },
   },
 };
 
@@ -29,6 +39,18 @@ export const Primary: Story = {
   args: {
     primary: true,
     label: "Button",
+  },
+  parameters: {
+    api: {
+      sendDocuments: {
+        match: '/xyz/456',
+        proxy: 'http://www.google.com',
+        mock: {
+          code: 200,
+          json: {},
+        }
+      }
+    },
   },
 };
 
